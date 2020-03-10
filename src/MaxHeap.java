@@ -9,16 +9,19 @@ public class MaxHeap implements Heap {
         data = new Integer[size];
     }
 
-    // Returns position of parent
-    private int parent(int pos) {
-        return pos / 2;
+    // return position of parent
+    private Integer parent(Integer pos) {
+        return (pos - 1) / 2;
     }
 
-    private int leftChild(int pos) {
-        return (2 * pos);
-    }
-    private int rightChild(int pos) {
+    // return left child
+    private Integer leftChild(Integer pos) {
         return (2 * pos) + 1;
+    }
+
+    // return right child
+    private Integer rightChild(Integer pos) {
+        return (2 * pos) + 2;
     }
 
     // build a heap based on data
@@ -35,7 +38,10 @@ public class MaxHeap implements Heap {
     // to be implemented in O(n)
     public void MaxHeapN(Integer[] data) {
         // homework
-
+        this.size = data.length;
+        for(Integer i = this.size; i > 0; i--) {
+            heapIfy(i);
+        }
     }
 
     // add an item to the heap
@@ -50,6 +56,7 @@ public class MaxHeap implements Heap {
         return false;
     }
 
+    // helper function to swap items in the heap
     public void swap(Integer index, Integer parentN) {
         int temp = data[index];
         data[index] = data[parentN];
@@ -59,16 +66,16 @@ public class MaxHeap implements Heap {
     // return the max item in the heap
     public Integer get() {
         // homework
-        Integer found = data[0];
-        data[0] = data[data.length-1];
-        heapIfy(0);
-        return found;
+        return data[0];
     }
 
     // remove the root item
     public Integer pop() {
         // homework
-        return null;
+        Integer found = data[0];
+        data[0] = data[this.size--];
+        heapIfy(0);
+        return found;
     }
 
     private void heapIfy(Integer item){

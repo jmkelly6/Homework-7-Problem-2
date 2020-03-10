@@ -4,7 +4,6 @@ import java.util.concurrent.TimeUnit;
 
 public class MaxHeapTest {
     // homework
-
     public void testAdd() {
         MaxHeap heap = new MaxHeap(3);
         int[] toAdd = {0,1,2,3,4};
