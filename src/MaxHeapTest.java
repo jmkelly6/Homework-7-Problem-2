@@ -1,11 +1,18 @@
 import static org.junit.Assert.*;
+
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+import java.util.Random;
 
 
 public class MaxHeapTest {
     // homework
+    // Constants to set the researching sample size for the MaxHeap functions
+    public static final int INCREMENT = 10;
+    public static final int MAX_TEST_SIZE = 8 * INCREMENT;
+
     MaxHeap empty = new MaxHeap(0);
-    public static Integer[][] testInts = {
+    public Integer[][] forHeaps = {
             {4,2,3,1},
             {6,4,5,3,1,2},
             {20,17,19,17,17,5,5},
@@ -13,16 +20,29 @@ public class MaxHeapTest {
             {100,80,90,70,77,12,11,10,8,9,1},
             {843,798,825,713,698,567,544,410,407,322},
     };
-    public static final int MAX_TEST_SIZE = testInts.length;
-    MaxHeap[] heaps = new MaxHeap[MAX_TEST_SIZE];
+    MaxHeap[] heaps = new MaxHeap[forHeaps.length];
+
+
+    public void initializeHeaps() {
+        for (int i = 0; i < forHeaps.length; i++) {
+            heaps[i] = new MaxHeap(forHeaps[i].length);
+            heaps[i].MaxHeapLogN(forHeaps[i]);
+        }
+    }
 
     // tests for research purposes
     public void testRunTimes() {
-        for(int i = 0; i < MAX_TEST_SIZE; i++) {
-            System.out.println("Time required to run MaxHeapLogN: " + testMaxHeapLogNTime(testInts[i], testInts[i].length));
-            heaps[i] = new MaxHeap(testInts[i].length);
-            heaps[i].MaxHeapLogN(testInts[i]);
-            System.out.println("Time required to run MaxHeapN: " + testMaxHeapNTime(testInts[i], testInts[i].length));
+        Integer[][] testInts = new Integer[8][];
+        Random r = new Random();
+        for(int i = 0; i < MAX_TEST_SIZE; i += INCREMENT) {
+            int heapSize = r.nextInt(200);
+            testInts[i/INCREMENT] = new Integer[heapSize];
+            for(int j = 0; j < testInts[i/INCREMENT].length; j++) {
+                testInts[i/INCREMENT][j] = r.nextInt(100);
+            }
+            Arrays.sort(testInts[i/INCREMENT]);
+            System.out.println("Time required to run MaxHeapLogN: " + testMaxHeapLogNTime(testInts[i/INCREMENT], testInts[i/INCREMENT].length));
+            //System.out.println("Time required to run MaxHeapN: " + testMaxHeapNTime(testInts[i], testInts[i].length));
         }
     }
 
