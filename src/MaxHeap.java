@@ -39,21 +39,20 @@ public class MaxHeap implements Heap {
     public void MaxHeapN(Integer[] data) {
         // homework
         this.size = data.length;
-        for(Integer i = this.size; i > 0; i--) {
-            heapIfy(i);
+        for(Integer i = this.size; i > 0; i--) {        //THIS ISN'T RIGHT YET, INITIAL CONDITION
+            heapIfyUp(i);
         }
     }
 
     // add an item to the heap
     public boolean add(Integer item) {
         // homework
-        //data[++size] = item;
-        if(item != 1 && data[item] < data[parent(item)]) {
-            swap(data[item], data[parent(item)]);
-            heapIfy(parent(item));
-            return true;
+        if(size == 0) {
+            return false;
         }
-        return false;
+        data[size] = item;
+        heapIfyUp(item);
+        return true;
     }
 
     // helper function to swap items in the heap
@@ -66,30 +65,56 @@ public class MaxHeap implements Heap {
     // return the max item in the heap
     public Integer get() {
         // homework
+        if(size == 0) {
+            return null;
+        }
         return data[0];
     }
 
     // remove the root item
     public Integer pop() {
         // homework
+        if(size == 0) {
+            return null;
+        }
         Integer found = data[0];
         data[0] = data[this.size--];
-        heapIfy(0);
+        heapIfyDown(data, 0);
         return found;
     }
 
-    private void heapIfy(Integer item){
-        if(item >= (size / 2) && item <= size) {
-            return;
+    private void heapIfyDown(Integer[] heap, int index){
+        //if(item >= (size / 2) && item <= size) {
+            //return;
+        //}
+//        if(data[item] < data[leftChild(item)] || data[item] < data[rightChild(item)]) {
+//            if(data[leftChild(item)] > data[rightChild(item)]) {
+//                swap(item, leftChild(item));
+//                heapIfyDown(leftChild(item));
+//            } else {
+//                swap(item, rightChild(item));
+//                heapIfyDown(rightChild(item));
+//            }
+//        }
+        Integer smallest = index;
+        Integer l = leftChild(index);
+        Integer r = rightChild(index);
+        if (l <= index && heap[l] < heap[smallest]) {
+            smallest = l;
         }
-        if(data[item] < data[leftChild(item)] || data[item] < data[rightChild(item)]) {
-            if(data[leftChild(item)] > data[rightChild(item)]) {
-                swap(item, leftChild(item));
-                heapIfy(leftChild(item));
-            } else {
-                swap(item, rightChild(item));
-                heapIfy(rightChild(item));
-            }
+        if (r <= index && heap[r] < heap[smallest]) {
+            smallest = r;
+        }
+        if(smallest != index) {
+            swap(smallest, index);
+            heapIfyDown(heap, smallest);
+        }
+    }
+
+    private void heapIfyUp(Integer item) {
+        if(item != 1 && data[item] < data[parent(item)]) {
+            swap(data[item], data[parent(item)]);
+            heapIfyUp(parent(item));
         }
     }
 }
