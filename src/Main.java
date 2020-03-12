@@ -5,10 +5,10 @@ public class Main {
         // left empty
         MaxHeapTest test = new MaxHeapTest();
         test.initializeHeaps();
-        test.testRunTimes();
-        //test.testAdd();
+        //test.testRunTimes();
+        test.testAdd();
         test.testGet();
-
+        test.testPop();
 
     }
 }

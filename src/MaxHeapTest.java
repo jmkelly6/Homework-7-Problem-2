@@ -1,3 +1,5 @@
+import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
@@ -22,7 +24,6 @@ public class MaxHeapTest {
     };
     MaxHeap[] heaps = new MaxHeap[forHeaps.length];
 
-
     public void initializeHeaps() {
         for (int i = 0; i < forHeaps.length; i++) {
             heaps[i] = new MaxHeap(forHeaps[i].length);
@@ -42,7 +43,7 @@ public class MaxHeapTest {
             }
             Arrays.sort(testInts[i/INCREMENT]);
             System.out.println("Time required to run MaxHeapLogN: " + testMaxHeapLogNTime(testInts[i/INCREMENT], testInts[i/INCREMENT].length));
-            //System.out.println("Time required to run MaxHeapN: " + testMaxHeapNTime(testInts[i], testInts[i].length));
+            System.out.println("Time required to run MaxHeapN: " + testMaxHeapNTime(testInts[i], testInts[i].length));
         }
     }
 
@@ -55,22 +56,23 @@ public class MaxHeapTest {
         answers[1] = true;
         answers[2] = true;
 
-
         for(int i = 0; i < toAdd.length; i++){
-            System.out.println("I is: " + i);
             assertEquals(answers[i], heap.add(toAdd[i]));
         }
     }
 
+    @Test
     public void testGet(){
+        initializeHeaps();
         Integer[] answers = {4, 6, 20, 60, 100, 843};
         for(int i = 0; i < answers.length; i++) {
             assertEquals(answers[i], heaps[i].get());
         }
     }
 
+    @Test
     public void testPop() {
-        MaxHeap heap = new MaxHeap(5);
+        MaxHeap heap = new MaxHeap(6);
         Integer[] forHeap = {6,4,5,3,1,2};
         heap.MaxHeapLogN(forHeap);
 
