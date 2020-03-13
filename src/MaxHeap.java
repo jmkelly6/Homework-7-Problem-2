@@ -30,7 +30,6 @@ public class MaxHeap implements Heap {
     // build a heap based on data
     // to be implemented in O(nlogn)
     public void MaxHeapLogN(Integer[] data) {
-        // homework
         for(int i = 0; i < data.length; i++) {
             add(data[i]);
         }
@@ -39,7 +38,6 @@ public class MaxHeap implements Heap {
     // build a heap based on data
     // to be implemented in O(n)
     public void MaxHeapN(Integer[] data) {
-        // homework
         size = data.length;
         for(int i = 0; i < size; i++) {
             this.data[i] = data[i];
@@ -48,7 +46,6 @@ public class MaxHeap implements Heap {
 
     // add an item to the heap
     public boolean add(Integer item) {
-        // homework
         if(size >= capacity) {
             return false;
         }
@@ -67,7 +64,6 @@ public class MaxHeap implements Heap {
 
     // return the max item in the heap
     public Integer get() {
-        // homework
         if(size == 0) {
             return null;
         }
@@ -76,7 +72,6 @@ public class MaxHeap implements Heap {
 
     // remove the root item
     public Integer pop() {
-        // homework
         if(size == 0) {
             return null;
         }
